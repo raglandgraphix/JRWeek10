@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 10</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   
+</head>
+<body>
+    <!--this is the bootstrap that builds the form.-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="d-flex justify-content-center">
+            <div class="col-md-6 bg-dark-subtle mt-2 pb-4 pt-4">
+                <form>
+                    <div class="form-inline d-flex justify-content-center align-items-center pt-2">
+                        <label for = "brickType" class="form-label ps-2 me-2">Brick Type</label>
+                        <input type="text" class="form-control w-50 " id="brickType" placeholder="Face Brick" aria-describedby="brick type" >
+                    </div>
+                    <div class="form-inline d-flex justify-content-center align-items-center pt-2">
+                        <label for = "brickColor" class="form-label ps-2 me-2">Brick Color</label>
+                        <input type="text" class="form-control w-50 " id="brickColor" placeholder="Medium Ironspot #46" aria-describedby="brick type">
+                    </div>
+                    <div class="form-inline d-flex justify-content-center align-items-center pt-2">
+                        <label for = "brickTexture" class="form-label ps-2 me-2">Brick Texture</label>
+                        <input type="text" class="form-control w-50 " id="brickTexture" placeholder="Smooth" aria-describedby="brick type">
+                    </div>
+                    <div class="form-inline d-flex justify-content-center align-items-center pt-2">
+                        <label for = "brickSize" class="form-label ps-2 me-2">Brick Size</label>
+                        <input type="text" class="form-control w-50" id="brickSize" placeholder="Modular" aria-describedby="brick type">
+                    </div>
+                    <div class="row d-flex justify-content-center mt-3">
+                        <div class="col-3">
+                            <button id="add-brick" class="btn btn-primary">ADD</button> 
+                        </div>
+                        
+                    </div>
+                    
+                </form>
+            </div>
+        </div> 
+        </div>
+        <!--the creates the table that the information will be put into.-->
+        <table id="bricksTable" class="table">
+            <thead>
+              <tr>
+                
+                <th scope="col">Brick Type</th>
+                <th scope="col">Brick Color</th>
+                <th scope="col">Brick Texture</th>
+                <th scope="col">Brick Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+        
+    </div >
+    <script type="text/javascript">
+
+        //this is the function that George showed us. I like it because it makes things easier when you have 
+        //to us it multiple times. 
+        /**
+         * Creates a new HTML element from the provided innerHTML string.
+         *
+         * @param {string} innerHTML The HTML code to be parsed and inserted into the element.
+         * @returns {HTMLElement} The first child element created from the provided innerHTML.
+         *
+         * @example
+         * const paragraph = createHTMLElement('<p>This is a paragraph!</p>');
+         * document.body.appendChild(paragraph);
+         */
+       function createHTMLElement(innerHTML){
+            const template  = document.createElement('template');
+            template.innerHTML = innerHTML;
+            return template.content.firstElementChild;
+        }
+        
+        //variables that do not change
+        const addButton = document.querySelector("#add-brick");
+        const brickTypes = document.querySelector("#brickType");
+        const brickColors = document.querySelector("#brickColor");
+        const brickTextures = document.querySelector("#brickTexture");
+        const brickSizes = document.querySelector("#brickSize");
+        const tableBrick = document.querySelector("#bricksTable");
+
+        addButton.addEventListener('click',function(e){
+            //preventing the default action of a form, which is to post. Post clears everything.
+            e.preventDefault();
+
+            //getting the tbody element.
+            const brickMade = tableBrick.querySelector('tbody');
+
+        // I have this commented out because this is the long form of making this work. however from what George showed us in class i am using his way.    
+        //I just want to make sure to show that i know how to do it both ways.
+
+           //const something = document.createElement('tr');
+        //    something.innerHTML =`
+        //         <td>${brickTypes.value}</td>
+        //         <td>${brickColors.value}</td>
+        //         <td>${brickTextures.value}</td>
+        //         <td>${brickSizes.value}</td>
+        //     `;
+        //     brickMade.appendChild(something);
+        //    const thing = brickMade.querySelector('tr');
+       
+         //George Herrees's way.  
+
+            // using the function George showed us this inputs the values
+            const addBrickRow = createHTMLElement(`
+            <tr>
+                <td>${brickTypes.value}</td>
+                <td>${brickColors.value}</td>
+                <td>${brickTextures.value}</td>
+                <td>${brickSizes.value}</td>
+            </tr>
+            `);
+            //this appends it to the table.
+            brickMade.append(addBrickRow);
+           
+        });
+    </script>
+       
+</body>
+</html>
